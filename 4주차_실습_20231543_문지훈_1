@@ -1,0 +1,21 @@
+TARGET=""
+N=0
+
+for element in "$@"; 
+do
+    if [ "$element" == "|" ]; then
+        continue
+    fi
+    TARGET="${TARGET}${element}|"
+	(( N += 1 ))
+done
+
+TARGET="${TARGET%|}"
+
+if [ $N -lt 1 ]; then
+	echo "Usage: $(basename $0) searcher [...searchfor]"
+	echo "(You didn't tell me what you want to search for.)"
+	exit 1
+fi
+
+egrep -i "$TARGET" mydata | awk -f display.awk

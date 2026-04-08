@@ -1,0 +1,14 @@
+CC = gcc
+TARGET = animal
+RESORCE = main.c blackcow.c dog.c turtle.c
+OBJECT = main.o blackcow.o dog.o turtle.o
+
+$(TARGET): $(OBJECT)
+	$(CC) -o $(TARGET) $(OBJECT)
+
+$(OBJECT): $(RESORCE)
+	$(CC) -c -g -Wall $(RESORCE)
+
+.PHONY : clean
+clean : 
+	rm -f $(TARGET) $(OBJECT)
